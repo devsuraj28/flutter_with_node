@@ -9,7 +9,24 @@ class DataProvider {
 
   Future<List<dynamic>> getAllProducts() async {
     try {
-      Response response = await ref.read(apiServicesProvider).get('/api/products');
+      Response response =
+          await ref.read(apiServicesProvider).get(doc: '/api/products');
+
+      if (response.statusCode == 200) {
+        return response.data['data'];
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
+      throw Exception("Here Exception Occurs $e");
+    }
+  }
+
+  Future<dynamic> getProductDetail(String productId) async {
+    try {
+      Response response = await ref
+          .read(apiServicesProvider)
+          .getById(doc: '/api/products', id: productId);
 
       if (response.statusCode == 200) {
         return response.data['data'];

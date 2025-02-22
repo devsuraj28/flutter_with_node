@@ -15,7 +15,7 @@ class ApiServices {
     ),
   );
 
-  Future<Response> get(String doc) async {
+  Future<Response> get({required String doc}) async {
     try {
       String fullUrl = "${_dio.options.baseUrl}$doc";
       log("GET Request: $fullUrl");
@@ -28,7 +28,7 @@ class ApiServices {
     }
   }
 
-  Future<Response> getById(String doc, String id) async {
+  Future<Response> getById({required String doc, required String id}) async {
     try {
       String fullUrl = "${_dio.options.baseUrl}$doc/$id";
       log("GET By ID Request: $fullUrl");
@@ -41,7 +41,7 @@ class ApiServices {
     }
   }
 
-  Future<Response> post(String doc, Map<dynamic, dynamic> data) async {
+  Future<Response> post({required String doc, required Map<dynamic, dynamic> data}) async {
     try {
       String fullUrl = "${_dio.options.baseUrl}$doc";
       log("POST Request: $fullUrl with Data: $data");
